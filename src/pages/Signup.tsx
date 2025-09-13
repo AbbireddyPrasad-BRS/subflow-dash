@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Eye, EyeOff, Crown, ArrowRight, Check } from 'lucide-react';
+import { Boxes } from '@/components/ui/background-boxes';
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -40,8 +42,10 @@ const Signup = () => {
   ];
 
   return (
-    <div className="min-h-screen hero-bg flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-4xl">
+    <div className="min-h-screen relative w-full overflow-hidden bg-slate-900 flex items-center justify-center px-4 py-12">
+      <div className="absolute inset-0 w-full h-full bg-slate-900 z-10 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
+      <Boxes />
+      <div className="w-full max-w-4xl relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Side - Benefits */}
           <div className="text-center lg:text-left">
