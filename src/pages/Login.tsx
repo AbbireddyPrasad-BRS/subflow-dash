@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Eye, EyeOff, Crown, ArrowRight } from 'lucide-react';
-import { BackgroundBeams } from '@/components/ui/background-beams';
+import { Boxes } from '@/components/ui/background-boxes';
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -27,7 +28,9 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen relative w-full overflow-hidden bg-neutral-950 flex items-center justify-center px-4 antialiased">
+    <div className="min-h-screen relative w-full overflow-hidden bg-slate-900 flex items-center justify-center px-4">
+      <div className="absolute inset-0 w-full h-full bg-slate-900 z-10 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
+      <Boxes />
       <div className="w-full max-w-md relative z-20">
         {/* Logo */}
         <div className="text-center mb-8">
@@ -150,7 +153,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <BackgroundBeams />
     </div>
   );
 };
