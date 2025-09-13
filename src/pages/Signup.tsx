@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { GlareCard } from '@/components/ui/glare-card'; // ✅ Import GlareCard
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -78,7 +79,7 @@ const Signup = () => {
           </div>
 
           {/* Right Side - Signup Form */}
-          <div className="glass-elevated p-8 rounded-2xl">
+          <GlareCard className="p-8 rounded-2xl">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold text-foreground mb-2">Create your account</h2>
               <p className="text-muted-foreground">Get started with your free trial</p>
@@ -235,7 +236,7 @@ const Signup = () => {
                 </Link>
               </p>
             </div>
-          </div>
+          </GlareCard>
         </div>
       </div>
     </div>

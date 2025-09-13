@@ -1,29 +1,42 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Crown, ArrowRight } from 'lucide-react';
 import { Boxes } from '@/components/ui/background-boxes';
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { GlareCard } from '@/components/ui/glare-card';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
-    password: ''
+    password: '',
+    role: 'user', // default
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Login attempt:', formData);
-    // Handle login logic here
-  };
+ const handleSubmit = (e) => {
+  e.preventDefault();
+  console.log('Login attempt:', formData);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  if (formData.role === 'admin') {
+    // Check default admin credentials
+    if (formData.email === 'admin@gmail.com' && formData.password === 'admin123') {
+      navigate('/admin');
+    } else {
+      alert('Invalid admin credentials');
+    }
+  } else {
+    // For user role, continue as normal
+    navigate('/dashboard');
+  }
+};
+
+  const handleInputChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -44,8 +57,7 @@ const Login = () => {
           <p className="text-muted-foreground">Sign in to your account to continue</p>
         </div>
 
-        {/* Login Form */}
-        <div className="glass-elevated p-8 rounded-2xl">
+        <GlareCard className="p-8 rounded-2xl">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="email" className="text-foreground">Email</Label>
@@ -79,12 +91,37 @@ const Login = () => {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 >
-                  {showPassword ? (
-                    <EyeOff className="w-4 h-4" />
-                  ) : (
-                    <Eye className="w-4 h-4" />
-                  )}
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
+              </div>
+            </div>
+
+            {/* Role selection */}
+            <div className="space-y-2">
+              <Label className="text-foreground">Login as</Label>
+              <div className="flex space-x-4">
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    name="role"
+                    value="user"
+                    checked={formData.role === 'user'}
+                    onChange={handleInputChange}
+                    className="accent-primary"
+                  />
+                  <span className="text-muted-foreground">User</span>
+                </label>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    name="role"
+                    value="admin"
+                    checked={formData.role === 'admin'}
+                    onChange={handleInputChange}
+                    className="accent-primary"
+                  />
+                  <span className="text-muted-foreground">Admin</span>
+                </label>
               </div>
             </div>
 
@@ -151,7 +188,7 @@ const Login = () => {
               </Link>
             </p>
           </div>
-        </div>
+        </GlareCard>
       </div>
     </div>
   );

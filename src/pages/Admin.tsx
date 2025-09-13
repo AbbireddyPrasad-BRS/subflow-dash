@@ -20,6 +20,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { SpotlightNew } from '@/components/ui/spotlight-new';
 
 const Admin = () => {
   const [selectedTab, setSelectedTab] = useState('overview');
@@ -55,69 +56,17 @@ const Admin = () => {
   ];
 
   const plans = [
-    {
-      id: 1,
-      name: 'Free',
-      price: 0,
-      subscribers: 1247,
-      status: 'active',
-      features: 3
-    },
-    {
-      id: 2,
-      name: 'Starter',
-      price: 9,
-      subscribers: 892,
-      status: 'active',
-      features: 5
-    },
-    {
-      id: 3,
-      name: 'Pro',
-      price: 29,
-      subscribers: 654,
-      status: 'active',
-      features: 8
-    },
-    {
-      id: 4,
-      name: 'Enterprise',
-      price: 99,
-      subscribers: 54,
-      status: 'active',
-      features: 12
-    }
+    { id: 1, name: 'Free', price: 0, subscribers: 1247, status: 'active', features: 3 },
+    { id: 2, name: 'Starter', price: 9, subscribers: 892, status: 'active', features: 5 },
+    { id: 3, name: 'Pro', price: 29, subscribers: 654, status: 'active', features: 8 },
+    { id: 4, name: 'Enterprise', price: 99, subscribers: 54, status: 'active', features: 12 }
   ];
 
   const recentSubscriptions = [
-    {
-      user: 'Alice Johnson',
-      plan: 'Pro',
-      amount: 29,
-      date: '2024-01-15',
-      status: 'active'
-    },
-    {
-      user: 'Bob Smith',
-      plan: 'Starter',
-      amount: 9,
-      date: '2024-01-15',
-      status: 'active'
-    },
-    {
-      user: 'Carol Davis',
-      plan: 'Enterprise',
-      amount: 99,
-      date: '2024-01-14',
-      status: 'pending'
-    },
-    {
-      user: 'David Wilson',
-      plan: 'Pro',
-      amount: 29,
-      date: '2024-01-14',
-      status: 'cancelled'
-    }
+    { user: 'Alice Johnson', plan: 'Pro', amount: 29, date: '2024-01-15', status: 'active' },
+    { user: 'Bob Smith', plan: 'Starter', amount: 9, date: '2024-01-15', status: 'active' },
+    { user: 'Carol Davis', plan: 'Enterprise', amount: 99, date: '2024-01-14', status: 'pending' },
+    { user: 'David Wilson', plan: 'Pro', amount: 29, date: '2024-01-14', status: 'cancelled' }
   ];
 
   const tabs = [
@@ -128,22 +77,26 @@ const Admin = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-black/[0.96] antialiased relative overflow-hidden">
+      {/* Spotlight background effect */}
+      <SpotlightNew />
+
       <Navbar />
-      
-      <main className="pt-24 pb-20">
+
+      <main className="pt-24 pb-20 relative z-10">
         <div className="container mx-auto px-4">
+
           {/* Header */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
             <div>
-              <h1 className="text-3xl font-bold mb-2 gradient-text">
+              <h1 className="text-3xl font-bold mb-2 gradient-text bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
                 Admin Dashboard
               </h1>
               <p className="text-muted-foreground">
                 Manage your subscription plans and monitor platform performance
               </p>
             </div>
-            <Button className="btn-hero mt-4 md:mt-0">
+            <Button className="btn-hero mt-4 md:mt-0 hover-glow">
               <Plus className="w-4 h-4 mr-2" />
               Create New Plan
             </Button>
@@ -166,24 +119,25 @@ const Admin = () => {
             ))}
           </div>
 
+          {/* Overview Tab */}
           {selectedTab === 'overview' && (
             <>
               {/* Stats Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+              <div className="grid grid-cols-1 hover-glow md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                 {adminStats.map((stat, index) => (
                   <DashboardCard key={index} {...stat} />
-                ))}
+                  ))}
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Recent Subscriptions */}
-                <div className="glass-elevated rounded-xl overflow-hidden">
+                <div className="glass-elevated rounded-xl overflow-hidden hover-glow">
                   <div className="p-6 border-b border-glass-border">
                     <h2 className="text-xl font-semibold text-foreground">Recent Subscriptions</h2>
                   </div>
                   <div className="divide-y divide-glass-border">
                     {recentSubscriptions.map((sub, index) => (
-                      <div key={index} className="p-4 hover:bg-glass/50 transition-colors">
+                      <div key={index} className="p-4 hover-glow">
                         <div className="flex items-center justify-between">
                           <div>
                             <h3 className="font-medium text-foreground">{sub.user}</h3>
@@ -208,11 +162,11 @@ const Admin = () => {
                 </div>
 
                 {/* Plan Performance */}
-                <div className="glass-elevated rounded-xl p-6">
+                <div className="glass-elevated rounded-xl p-6 hover-glow">
                   <h2 className="text-xl font-semibold text-foreground mb-6">Plan Performance</h2>
                   <div className="space-y-4">
                     {plans.map((plan) => (
-                      <div key={plan.id} className="flex items-center justify-between p-4 bg-glass/50 rounded-lg">
+                      <div key={plan.id} className="flex items-center justify-between p-4 bg-glass/50 rounded-lg hover-glow">
                         <div>
                           <h3 className="font-medium text-foreground">{plan.name}</h3>
                           <p className="text-sm text-muted-foreground">
@@ -231,16 +185,15 @@ const Admin = () => {
             </>
           )}
 
+          {/* Manage Plans Tab */}
           {selectedTab === 'plans' && (
-            <div className="glass-elevated rounded-xl overflow-hidden">
-              <div className="p-6 border-b border-glass-border">
-                <div className="flex justify-between items-center">
-                  <h2 className="text-xl font-semibold text-foreground">Subscription Plans</h2>
-                  <Button className="btn-hero">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Add Plan
-                  </Button>
-                </div>
+            <div className="glass-elevated rounded-xl overflow-hidden hover-glow">
+              <div className="p-6 border-b border-glass-border flex justify-between items-center">
+                <h2 className="text-xl font-semibold text-foreground">Subscription Plans</h2>
+                <Button className="btn-hero hover-glow">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Plan
+                </Button>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full">
@@ -255,7 +208,7 @@ const Admin = () => {
                   </thead>
                   <tbody className="divide-y divide-glass-border">
                     {plans.map((plan) => (
-                      <tr key={plan.id} className="hover:bg-glass/50 transition-colors">
+                      <tr key={plan.id} className="hover-glow">
                         <td className="p-4">
                           <div>
                             <h3 className="font-medium text-foreground">{plan.name}</h3>
@@ -265,27 +218,25 @@ const Admin = () => {
                         <td className="p-4 text-foreground">${plan.price}/mo</td>
                         <td className="p-4 text-foreground">{plan.subscribers}</td>
                         <td className="p-4">
-                          <Badge variant="default" className="text-xs">
-                            {plan.status}
-                          </Badge>
+                          <Badge variant="default" className="text-xs">{plan.status}</Badge>
                         </td>
                         <td className="p-4">
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                              <Button variant="ghost" size="sm">
+                              <Button variant="ghost" size="sm" className="hover-glow">
                                 <MoreHorizontal className="w-4 h-4" />
                               </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
-                              <DropdownMenuItem>
+                              <DropdownMenuItem className="hover-glow">
                                 <Eye className="w-4 h-4 mr-2" />
                                 View Details
                               </DropdownMenuItem>
-                              <DropdownMenuItem>
+                              <DropdownMenuItem className="hover-glow">
                                 <Edit className="w-4 h-4 mr-2" />
                                 Edit Plan
                               </DropdownMenuItem>
-                              <DropdownMenuItem className="text-destructive">
+                              <DropdownMenuItem className="text-destructive hover-glow">
                                 <Trash2 className="w-4 h-4 mr-2" />
                                 Delete Plan
                               </DropdownMenuItem>
@@ -300,15 +251,17 @@ const Admin = () => {
             </div>
           )}
 
+          {/* Users Tab */}
           {selectedTab === 'users' && (
-            <div className="glass-elevated rounded-xl p-6">
+            <div className="glass-elevated rounded-xl p-6 hover-glow">
               <h2 className="text-xl font-semibold text-foreground mb-4">User Management</h2>
               <p className="text-muted-foreground">User management features coming soon...</p>
             </div>
           )}
 
+          {/* Analytics Tab */}
           {selectedTab === 'analytics' && (
-            <div className="glass-elevated rounded-xl p-6">
+            <div className="glass-elevated rounded-xl p-6 hover-glow">
               <h2 className="text-xl font-semibold text-foreground mb-4">Analytics Dashboard</h2>
               <p className="text-muted-foreground">Advanced analytics and reporting features coming soon...</p>
             </div>

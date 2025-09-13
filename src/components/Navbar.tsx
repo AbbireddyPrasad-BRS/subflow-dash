@@ -52,7 +52,7 @@ const Navbar = () => {
                 Login
               </Button>
             </Link>
-            <Link to="/admin">
+            <Link to="/login">
               <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
                 <Settings className="w-4 h-4 mr-2" />
                 Admin
