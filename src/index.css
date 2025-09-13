@@ -206,6 +206,19 @@ Modern SaaS design with gradients and glass morphism
     50% { box-shadow: 0 0 40px hsl(var(--primary) / 0.6); }
   }
 
+  /* Custom Utility Classes */
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
   /* Animation Classes */
   .animate-float {
     animation: float 3s ease-in-out infinite;
